@@ -16,6 +16,8 @@ var AppConfig = require('./configs/config');
 
 var app = express();
 
+var S3Adapter = require('parse-server').S3Adapter;
+
 app.set('views',  path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
 app.use(logger('dev'));
@@ -62,7 +64,13 @@ var api = new ParseServer({
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: AppConfig.APP_ID,
   masterKey: AppConfig.MASTER_KEY,
-  serverURL: AppConfig.SERVER_URL
+  serverURL: AppConfig.SERVER_URL,
+  filesAdapter: new S3Adapter(
+    process.env.AWS_ACCESS_KEY_ID || "S3_ACCESS_KEY",
+    process.env.AWS_SECRET_ACCESS_KEY || "S3_SECRET_KEY",
+    process.env.AWS_BUCKET || "wemunize-dev",
+    {region: "us-east-2", bucketPrefix: "public/", directAccess: true}
+),
   // liveQuery: {
     // classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   // }
