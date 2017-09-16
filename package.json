@@ -26,6 +26,7 @@
     "parse": "~1.8.0",
     "parse-dashboard": "^1.0.25",
     "parse-server": "*",
+    "parse-server-s3-adapter": "^1.2.0",
     "path": "^0.12.7",
     "underscore": "^1.8.3"
   },

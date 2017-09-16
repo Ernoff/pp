@@ -16,7 +16,7 @@ var AppConfig = require('./configs/config');
 
 var app = express();
 
-var S3Adapter = require('parse-server').S3Adapter;
+var S3Adapter = require('parse-server').S3Adapter;//TODO: this is deprecated
 
 app.set('views',  path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
